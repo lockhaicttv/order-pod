@@ -1,0 +1,10 @@
+services:
+  kmapp-fe:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      target: kmapp-runner
+      args:
+        ENV: 'dev'
+    ports:
+      - '3000:3000'

@@ -1,0 +1,30 @@
+{
+  "Index": {
+    "title": "Hello world!"
+  },
+  "common": {
+
+  },
+  "global": {
+    "searchPlaceholder": "Input the project name"
+  },
+  "dailyReport": {
+
+  },
+  "order": {},
+  "planning": {},
+  "productSchedule": {},
+  "machineSchedule": {},
+  "ticketPlanning": {},
+  "employee": {},
+  "employeeGroup": {},
+  "position": {},
+  "product": {},
+  "productIssue": {},
+  "process": {},
+  "machine": {},
+  "stage": {},
+  "productionQuota": {},
+  "recipe": {},
+  "tool": {}
+}

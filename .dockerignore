@@ -1,0 +1,71 @@
+# Docker ignore
+.editorconfig
+.gitmodules
+
+node_modules
+**/node_modules
+
+#ignore standalone node_modules
+!**/*/.next/standalone/**
+!**/*/.next/standalone/node_modules*
+
+# All secrets
+#**/.env
+
+# By default all git files
+.git
+.gitignore
+.gitattributes
+.github
+
+# Tools caches
+.cache/*
+tsconfig.tsbuildinfo
+.eslintcache
+
+# Yarn
+!.yarnrc.yml
+!.yarn/plugins
+!.yarn/releases
+
+# Used when building with nextjs (next-eslint)
+!.eslintrc.base.json
+!.prettierignore
+!.prettierrc.js
+!.eslintignore
+
+# npm
+!.npmrc
+
+# Docker related
+.dockerignore
+Dockerfile
+docker-compose.*.yml
+docker-compose.yml
+docker
+!docker/nginx
+!docker/ssl
+
+# Log files
+logs
+*.log
+
+# Temp files
+tmp
+*.tmp
+
+# IDE related
+
+.idea
+.vscode
+
+
+.turbo
+
+dist
+
+build
+
+.next
+
+out

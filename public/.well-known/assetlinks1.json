@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.lockhaicttv.kmappaplication",
+      "sha256_cert_fingerprints": [
+        "8A:74:FE:AA:D6:11:AC:D0:17:5A:A1:DD:A4:F4:EE:28:5C:56:92:98:B2:DE:4B:2E:C4:D6:26:0E:36:8A:80:13"
+      ]
+    }
+  }
+]

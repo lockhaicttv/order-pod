@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "com.example.kmapp",
+    "package_name": "com.example.kmapp",
+    "sha256_cert_fingerprints":
+    ["74:3D:52:92:22:09:8C:D3:F4:6E:27:E4:BD:99:3E:58:07:23:25:30:67:90:32:50:E8:A2:7E:45:D2:5F:C1:85"]
+  }
+}]
