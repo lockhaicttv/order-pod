@@ -1,9 +1,9 @@
 services:
-  kmapp-fe:
+  order-pod-fe:
     build:
       context: .
       dockerfile: ./Dockerfile
-      target: kmapp-runner
+      target: order-pod-runner
       args:
         ENV: 'dev'
     ports:
