@@ -4,10 +4,13 @@ import { KMAPP_ENDPOINT } from '@app/api/api-endpoints.constants'
 import { DataEntry, ListingQuery } from '@app/api/types/api-common.types'
 import { Order } from '@app/containers/Orders2/types/order.types'
 import { orderQueryKey } from '@app/containers/Orders2/constants/order.query-key'
+import useStore from '@app/store/useStore'
 
 const useGetOrders = (query?: ListingQuery) => {
+  const { token } = useStore()
+
   return useQuery({
-    queryKey: orderQueryKey.getAllOrders(query),
+    queryKey: [...orderQueryKey.getAllOrders(query), token],
     queryFn: async () => {
       return await callApi<DataEntry<Order[], true>, ListingQuery>(
         `${KMAPP_ENDPOINT.order}/all`,

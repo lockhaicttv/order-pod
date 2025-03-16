@@ -24,14 +24,14 @@ export function middleware(request: NextRequest) {
     const locale = url.pathname.substring(1, 3)
 
     if (locales.includes(locale)) {
-      url.pathname = `/${locale}/dashboard`
+      url.pathname = `/${locale}/orders`
 
       return NextResponse.redirect(url)
     }
   }
 
   if (url.pathname === '') {
-    url.pathname = `/${defaultLocale}/dashboard`
+    url.pathname = `/${defaultLocale}/orders`
 
     return NextResponse.redirect(url)
   }

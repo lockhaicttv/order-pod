@@ -6,7 +6,10 @@ import {
   getCoreRowModel,
   getSortedRowModel,
   SortingState,
-  useReactTable
+  useReactTable,
+  getExpandedRowModel,
+  ExpandedState,
+  Row
 } from '@tanstack/react-table'
 import { CSSProperties, useState } from 'react'
 import Paginator from '@app/components/Table/Paginator'
@@ -25,34 +28,43 @@ export interface PaginationProps {
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  renderSubComponent?: (props: { row: Row<TData> }) => React.ReactElement
   isShowFooter?: boolean
   totalRecords: number
   onPaginationChange?: (props: PaginationProps) => void
   sizeOptions?: number[]
   showPaging?: boolean
+  getRowCanExpand?: (row: Row<TData>) => boolean
 }
 const DataTable = <TData, TValue>({
   data,
   columns,
+  renderSubComponent,
   isShowFooter = false,
   totalRecords,
   onPaginationChange,
   sizeOptions = DEFAULT_SIZER_OPTION,
-  showPaging = true
+  showPaging = true,
+  getRowCanExpand
 }: DataTableProps<TData, TValue>) => {
   const { page: urlPage, pageSize: urlPageSize } = useTablePagination()
   const [sorting, setSorting] = useState<SortingState>([])
   const [page, setPage] = useState(urlPage || DEFAULT_PAGINATION.page)
   const [pageSize, setPageSize] = useState(urlPageSize || DEFAULT_PAGINATION.pageSize)
+  const [expanded, setExpanded] = useState<ExpandedState>({})
 
   const table = useReactTable({
     data,
     columns,
+    getRowCanExpand,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    getExpandedRowModel: getExpandedRowModel(),
+    onExpandedChange: setExpanded,
     onSortingChange: setSorting,
     state: {
-      sorting
+      sorting,
+      expanded
     }
   })
 
@@ -81,11 +93,21 @@ const DataTable = <TData, TValue>({
           <TableBody>
             {table.getRowModel().rows.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id}>
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
-                  ))}
-                </TableRow>
+                <>
+                  <TableRow key={row.id}>
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+                    ))}
+                  </TableRow>
+                  {row.getIsExpanded() && (
+                    <TableRow>
+                      {/* 2nd row is a custom 1 cell row */}
+                      <TableCell colSpan={row.getVisibleCells().length}>
+                        {!!renderSubComponent && renderSubComponent({ row })}
+                      </TableCell>
+                    </TableRow>
+                  )}
+                </>
               ))
             ) : (
               <TableRow>

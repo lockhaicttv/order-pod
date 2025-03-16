@@ -22,6 +22,8 @@ import styled from 'styled-components'
 import useSearchParams from '@app/hooks/useSearchParams'
 import qs from 'qs'
 import { FilterProps } from '@app/containers/TicketPlanning/types/ticket-planning.types'
+import { ORDER_LIST_ROUTE } from '@app/containers/Orders/constants/order-routes.constants'
+import useCheckAgency from '@app/hooks/useCheckAgency'
 
 type FormFields = z.infer<typeof loginPayloadSchema>
 
@@ -40,7 +42,7 @@ const LoginForm = () => {
     }
   })
   const token = cookieStorage.getByKey('token')
-  const { setIsAuthenticated } = useStore()
+  const { setIsAuthenticated, setToken } = useStore()
   const router = useRouter()
   const { locale } = useParams()
   const { searchParams, setSearchParamsToUrl } = useSearchParams()
@@ -53,6 +55,7 @@ const LoginForm = () => {
   } = form
 
   const { mutate: mutateLogin, isPending: isLoggingIn } = useLogin()
+  const { mutate: mutateCheckAgency, isPending: isCheckingAgency } = useCheckAgency()
 
   const onSubmit = (values: z.infer<typeof loginPayloadSchema>) => {
     const { userName, password, rememberMe } = values
@@ -70,8 +73,10 @@ const LoginForm = () => {
       return
     }
 
+    mutateCheckAgency()
+    setToken(token)
     setIsAuthenticated(true)
-    router.push(`${redirect ? redirect : DASHBOARD_ROUTE}`)
+    router.push(`${redirect ? redirect : ORDER_LIST_ROUTE}`)
   }, [token])
 
   return (

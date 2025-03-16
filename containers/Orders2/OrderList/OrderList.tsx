@@ -5,7 +5,7 @@ import { PlusIcon } from '@radix-ui/react-icons'
 import Page from '@app/components/Page/Page'
 import useTablePagination from '@app/hooks/useTablePagination'
 import { useRouter } from 'next/navigation'
-import { getOrderListColumns } from '@app/containers/Orders2/constants/order-list.columns'
+import { getOrderListColumns, RenderDetail } from '@app/containers/Orders2/constants/order-list.columns'
 import {
   ORDER_DETAIL_CREATE_ROUTE,
   ORDER_DETAIL_EDIT_ROUTE
@@ -18,6 +18,8 @@ import { orderQueryKey } from '@app/containers/Orders2/constants/order.query-key
 import { useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 import { DownloadIcon } from 'lucide-react'
+import ModalExportData from '@app/containers/Dashboard/components/ModalExportData'
+import React from 'react'
 
 const OrderList = () => {
   const { handlePaginationChange, pageSize, page } = useTablePagination()
@@ -64,10 +66,7 @@ const OrderList = () => {
         {/*  <PlusIcon />*/}
         {/*  Add Order*/}
         {/*</Button>*/}
-        <Button className='flex gap-2' onClick={() => console.log('export')}>
-          <DownloadIcon />
-          Export
-        </Button>
+        <ModalExportData />
       </div>
       <div className='mt-8'>
         <DataTable
@@ -78,6 +77,8 @@ const OrderList = () => {
           data={orders?.data || []}
           totalRecords={orders?.meta.count || 0}
           onPaginationChange={handlePaginationChange}
+          getRowCanExpand={() => true}
+          renderSubComponent={(props) => <RenderDetail row={props.row} />}
         />
       </div>
     </Page>

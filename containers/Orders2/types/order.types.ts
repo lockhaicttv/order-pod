@@ -49,10 +49,23 @@ export interface Order {
   deliveryDate: string
   lastUpdateDate: string
   detail: OrderDetail[]
+  status: Status
+}
+
+export enum Status {
+  INITIAL = 'initial',
+  PROCESSING = 'processing',
+  DONE = 'done',
+  CANCELED = 'canceled'
 }
 
 export interface UpdateOrderPayload extends Omit<Order, 'customer'> {
   customer?: Customer | null
+}
+
+export interface UpdateOrderStatusPayload {
+  orderId: string
+  status: Status
 }
 
 export interface CreateOrderPayload extends Omit<UpdateOrderPayload, 'id'> {}

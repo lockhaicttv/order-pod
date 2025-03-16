@@ -1,6 +1,6 @@
 'use client'
 
-import logo from '@app/assets/logo/logo-rectangle-2.png'
+import logo from '@app/assets/logo/logo-printiz.png'
 import styled from 'styled-components'
 import { Button } from '@app/components/ui/button'
 import { DragHandleHorizontalIcon } from '@radix-ui/react-icons'
@@ -23,8 +23,8 @@ const Header = () => {
               <Image
                 src={logo}
                 style={{
-                  height: '100%',
-                  width: '90%'
+                  height: '80%',
+                  width: '100%'
                 }}
                 alt='header-logo'
               />
@@ -32,13 +32,11 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <div className='tablet:flex w-0 tablet:w-2/4 h-full items-center hidden'>
-        <Search />
-      </div>
+      <div className='tablet:flex w-0 tablet:w-2/4 h-full items-center hidden'>{/*<Search />*/}</div>
 
       <div className='flex justify-end w-1/2 tablet:w-1/4 desktop:w-1/3 items-center pr-2'>
         <ModeToggle />
-        <LanguageChanger />
+        {/*<LanguageChanger />*/}
         {broken && (
           <Button variant='ghost' size='icon' onClick={() => toggleNavigation(true)}>
             <PanelLeftIcon size={20} color='white' />

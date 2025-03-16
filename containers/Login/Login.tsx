@@ -6,7 +6,7 @@ import Image from 'next/image'
 import LoginForm from '@app/containers/Login/components/LoginForm'
 import LanguageChanger from '@app/components/Layout/components/LanguageChanger'
 import styled from 'styled-components'
-import logoImage from '@app/assets/logo/logo-2.png'
+import logoImage from '@app/assets/logo/logo-printiz.png'
 import ModeToggle from '@app/components/ModeToggle'
 
 const Login = () => {
@@ -34,7 +34,7 @@ const Login = () => {
             alt='logo-icon'
           />
           <ModeToggle variant='default' />
-          <LanguageChanger variant='default' />
+          {/*<LanguageChanger variant='default' />*/}
         </div>
         <div className='flex items-center justify-center mt-14'>
           <LoginForm />
