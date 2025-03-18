@@ -50,6 +50,7 @@ export interface Order {
   lastUpdateDate: string
   detail: OrderDetail[]
   status: Status
+  label: string
 }
 
 export enum Status {

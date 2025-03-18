@@ -4,7 +4,7 @@ import { Order, Status, UpdateOrderStatusPayload } from '@app/containers/Orders2
 import { dateFormat } from '@app/utils/formatDate'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@app/components/ui/table'
 import Image from 'next/image'
-import { ChevronDownIcon, ChevronRightIcon, ImageIcon, MapPinIcon, PhoneIcon, UserIcon } from 'lucide-react'
+import { ChevronDownIcon, ChevronRightIcon, ImageIcon, InfoIcon, MapPinIcon, PhoneIcon, UserIcon } from 'lucide-react'
 import { Button } from '@app/components/ui/button'
 import InfoWithIcon from '@app/components/InfoWithIcon'
 import StatusTag from '@app/components/StatusTag'
@@ -61,6 +61,17 @@ export const getOrderListColumns = ({ onEdit, onDelete }: OrderListColumns): Col
     accessorKey: 'status',
     header: 'Status',
     cell: ({ row }) => <RenderStatus row={row} />
+  },
+  {
+    accessorKey: 'label',
+    header: 'Shipping Label',
+    cell: ({ row }) => (
+      <InfoWithIcon
+        icon={<InfoIcon />}
+        info={<div className='w-[150px] whitespace-nowrap overflow-hidden text-ellipsis'>{row.original.label}</div>}
+        title={row.original.label}
+      />
+    )
   },
   {
     accessorKey: 'orderDate',
